@@ -25,6 +25,7 @@
                                 placeholder="Add a tag" wire:keydown.enter.prevent="tags[] = newTag; newTag='';">
                             <small class="form-text text-muted">Press Enter to add tag</small>
                         </div>
+                        
 
                         <!-- عرض الـ tags المضافة -->
                         <div>
