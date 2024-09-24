@@ -8,25 +8,7 @@
     data-kt-menu="true">
     <!--begin::Menu item-->
     <div class="menu-item px-3">
-        <a href="{{ route('home-page.show', $home_page) }}" class="menu-link px-3">
-            View
-        </a>
-    </div>
-    <!--end::Menu item-->
-
-    <!--begin::Menu item-->
-    <div class="menu-item px-3">
-        <a href="#" class="menu-link px-3" data-kt-home_page-id="{{ $home_page->id }}" data-bs-toggle="modal"
-            data-bs-target="#kt_modal_add_home_page" data-kt-action="update_row">
-            Edit
-        </a>
-    </div>
-    <!--end::Menu item-->
-
-    <!--begin::Menu item-->
-    <div class="menu-item px-3">
-        <a href="#" class="menu-link px-3" data-kt-home_page-id="{{ $home_page->id }}"
-            data-kt-action="delete_row">
+        <a href="#" class="menu-link px-3" data-kt-home_page-id="{{ $home_page->id }}" data-kt-action="delete_row">
             Delete
         </a>
     </div>

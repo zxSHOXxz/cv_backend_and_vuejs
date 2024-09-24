@@ -1,5 +1,5 @@
-<div class="d-flex align-items-center">
-    <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+<div class="d-flex align-items-center text-center justify-content-center">
+    <div class="symbol symbol-circle symbol-50px text-center overflow-hidden me-3">
         <a href="{{ route('projects.show', $project) }}">
             @if ($project->image)
                 <div class="symbol-label">

@@ -3,6 +3,7 @@
 namespace App\Livewire\Project;
 
 use App\Models\Project;
+use App\Models\Tag;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -16,17 +17,23 @@ class AddProjectModal extends Component
     public $description;
     public $status;
     public $photo;
+    public $saved_photo;
     public $completion_date;
+    public $tag_ids;
 
     public $edit_mode;
 
-    protected $rules = [
-        'name' => 'required|string',
-        'description' => 'required|string',
-        'status' => 'required|boolean',
-        'photo' => 'required',
-        'completion_date' => 'required|date'
-    ];
+    protected function rules()
+    {
+        return [
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'status' => 'required|boolean',
+            'photo' => $this->edit_mode ? 'nullable' : 'required', // الصورة غير مطلوبة في وضع التعديل
+            'completion_date' => 'required|date',
+            'tag_ids' => 'required|array',
+        ];
+    }
 
     protected $listeners = [
         'delete_project' => 'deleteProject',
@@ -35,12 +42,16 @@ class AddProjectModal extends Component
 
     public function render()
     {
-        return view('livewire.project.add-project-modal');
+        $tags = Tag::all();
+        return view('livewire.project.add-project-modal', [
+            'tags' => $tags,
+        ]);
     }
 
     public function submit()
     {
         $this->validate();
+
         DB::transaction(function () {
             $data = [
                 'name' => $this->name,
@@ -63,6 +74,9 @@ class AddProjectModal extends Component
                 }
                 $project->save();
             }
+
+            $project->tags()->sync($this->tag_ids);
+
             if ($this->edit_mode) {
                 // Emit a success event with a message
                 $this->dispatch('success', __('Project updated'));
@@ -81,20 +95,21 @@ class AddProjectModal extends Component
 
         $project = Project::find($id);
         $this->project_id = $project->id;
-        $this->photo = $project->photo;
+        $this->photo = $project->image;
+        $this->saved_photo = $project->image;
         $this->name = $project->name;
         $this->description = $project->description;
-        $this->status = $project->status;
+        $this->status = (bool) $project->status;
         $this->completion_date = $project->completion_date;
+        $this->tag_ids = $project->tags->pluck('id')->toArray();
+
+        $this->dispatch('tagsUpdated', ['tags' => $this->tag_ids]);
     }
 
 
     public function deleteProject($id)
     {
-        // Delete the project record with the specified ID
         Project::destroy($id);
-
-        // Emit a success event with a message
         $this->dispatch('success', 'Project successfully deleted');
     }
 }

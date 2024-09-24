@@ -12,6 +12,7 @@ use App\Http\Controllers\PersonalInformationController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SkillController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\TestimonialController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('/user-management/permissions', PermissionManagementController::class);
     });
     Route::resource('/project-management/projects', ProjectController::class);
+    Route::resource('/project-management/tags', TagController::class);
     Route::resource('/testimonial-management/testimonials', TestimonialController::class);
     Route::resource('/skill-management/skills', SkillController::class);
     Route::resource('/service-management/services', ServiceController::class);
@@ -45,6 +47,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/education-management/educations', EductaionController::class);
     Route::resource('/personal-information-management/personal-information', PersonalInformationController::class);
     Route::resource('/home-page-management/home-page', HomePageController::class);
+    Route::get('/home-page-management/home-page/show', [HomePageController::class, 'show'])->name('home-page.show');
 });
 
 Route::get('/error', function () {

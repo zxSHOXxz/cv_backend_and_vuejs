@@ -79,11 +79,10 @@
                         <!--begin::Input group-->
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
-                            <label class="required fw-semibold fs-6 mb-2">status</label>
+                            <label class="required fw-semibold fs-6 mb-2">Status</label>
                             <!--end::Label-->
 
                             <!--begin::Input-->
-
                             <div class="form-check form-switch form-check-custom form-check-success form-check-solid">
                                 <input class="form-check-input" type="checkbox" wire:model="status"
                                     id="kt_flexSwitchCustomDefault_1_1" />
@@ -91,7 +90,6 @@
                                     Status
                                 </label>
                             </div>
-
                             <!--end::Input-->
                             @error('status')
                                 <span class="text-danger">{{ $message }}</span>
@@ -99,22 +97,37 @@
                         </div>
                         <!--end::Input group-->
 
-                    </div>
-                    <!--end::Scroll-->
 
-                    <!--begin::Actions-->
-                    <div class="text-center pt-15">
-                        <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal" aria-label="Close"
-                            wire:loading.attr="disabled">Discard</button>
-                        <button type="submit" class="btn btn-primary" data-kt-projects-modal-action="submit">
-                            <span class="indicator-label" wire:loading.remove>Submit</span>
-                            <span class="indicator-progress" wire:loading wire:target="submit">
-                                Please wait...
-                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                            </span>
-                        </button>
-                    </div>
-                    <!--end::Actions-->
+                        <div class="fv-row mb-7">
+                            <label class="required fw-semibold fs-6 mb-2">Tags</label>
+                            <div wire:ignore>
+                                <select class="form-select form-select-lg form-select-solid" data-control="select2"
+                                    data-placeholder="Select an option" data-allow-clear="true"
+                                    data-close-on-select="true" multiple="multiple" id="tag_ids">
+                                    <option></option>
+                                    @foreach ($tags as $tag)
+                                        <option value="{{ $tag->id }}">{{ $tag->title }}</option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <!--end::Scroll-->
+
+                        <!--begin::Actions-->
+                        <div class="text-center pt-15">
+                            <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal" aria-label="Close"
+                                wire:loading.attr="disabled">Discard</button>
+                            <button type="submit" class="btn btn-primary" data-kt-projects-modal-action="submit">
+                                <span class="indicator-label" wire:loading.remove>Submit</span>
+                                <span class="indicator-progress" wire:loading wire:target="submit">
+                                    Please wait...
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                </span>
+                            </button>
+                        </div>
+                        <!--end::Actions-->
                 </form>
                 <!--end::Form-->
             </div>
@@ -123,4 +136,22 @@
         <!--end::Modal content-->
     </div>
     <!--end::Modal dialog-->
+
 </div>
+
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#tag_ids').select2();
+
+            $('#tag_ids').on('change', function(e) {
+                var data = $(this).val();
+                @this.set('tag_ids', data);
+            });
+            window.addEventListener('tagsUpdated', event => {
+                $('#tag_ids').val(event.detail[0].tags).trigger('change');
+            });
+        });
+    </script>
+@endpush

@@ -32,10 +32,16 @@ class ProjectsDataTable extends DataTable
             ->editColumn('status', function (Project $project) {
                 return sprintf('<span class="badge badge-info fw-bold">%s</span>', $project->status == 1 ? 'active' : 'inactive');
             })
+            ->editColumn('tags', function (Project $project) {
+                return $project->tags->map(function ($tag) {
+                    return sprintf('<span class="badge badge-info">%s</span>', $tag->title);
+                })->implode(' ');
+            })
+
             ->addColumn('action', function (Project $project) {
                 return view('pages/apps.projects.columns._actions', compact('project'));
             })
-            ->rawColumns(['status', 'action']) // تأكد من تضمين الحقول التي تحتوي على HTML هنا
+            ->rawColumns(['status', 'tags', 'action'])
             ->setRowId('id');
     }
 
@@ -58,7 +64,7 @@ class ProjectsDataTable extends DataTable
             ->minifiedAjax()
             ->dom('rt' . "<'row'<'col-sm-12'tr>><'d-flex justify-content-between'<'col-sm-12 col-md-5'i><'d-flex justify-content-between'p>>",)
             ->addTableClass('table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer text-gray-600 fw-semibold')
-            ->setTableHeadClass('text-start text-muted fw-bold fs-7 text-uppercase gs-0')
+            ->setTableHeadClass('text-center text-muted fw-bold fs-7 text-uppercase gs-0')
             ->orderBy(2)
             ->drawCallback("function() {" . file_get_contents(resource_path('views/pages/apps/projects/columns/_draw-scripts.js')) . "}");
     }
@@ -69,12 +75,28 @@ class ProjectsDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('id'),
-            Column::make('name'),
-            Column::make('description'),
-            Column::make('status'),
-            Column::make('completion_date'),
+            Column::make('id')
+                ->addClass('text-center'),
+
+            Column::make('name')
+                ->addClass('text-center'),
+
+            Column::make('description')
+                ->addClass('text-center'),
+
+            Column::make('status')
+                ->addClass('text-center'),
+
+            Column::make('completion_date')
+                ->addClass('text-center'),
+
+
+            Column::make('tags')
+                ->addClass('text-center')
+                ->title('Tags'),
+
             Column::computed('action')
+                ->addClass('text-center')
                 ->exportable(false)
                 ->printable(false)
                 ->width(60)

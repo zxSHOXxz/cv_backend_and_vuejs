@@ -8,8 +8,7 @@
         {{ Breadcrumbs::render('project-management.projects.index') }}
     @endsection
 
-    <div class="card">
-        <!--begin::Card header-->
+    <div class="card d-flex flex-column">
         <div class="card-header border-0 pt-6">
             <!--begin::Card title-->
             <div class="card-title">
@@ -48,7 +47,7 @@
         <!--end::Card header-->
 
         <!--begin::Card body-->
-        <div class="card-body py-4">
+        <div class="card-body py-4 w-100">
             <!--begin::Table-->
             <div class="table-responsive">
                 {{ $dataTable->table() }}

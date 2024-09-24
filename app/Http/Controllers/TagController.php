@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\HomePageDataTable;
-use App\Models\HomePage;
+use App\DataTables\TagsDataTable;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
-class HomePageController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(HomePageDataTable $dataTable)
+    public function index(TagsDataTable $dataTable)
     {
-        return $dataTable->render('pages/apps.home-page.list');
+        return $dataTable->render('pages/apps.tags.list');
     }
 
     /**
@@ -32,16 +32,18 @@ class HomePageController extends Controller
         //
     }
 
-    public function show()
+    /**
+     * Display the specified resource.
+     */
+    public function show(Tag $tag)
     {
-        $home_page = HomePage::all()->first();
-        return view('pages.apps.home-page.show', compact('home_page'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(HomePage $homePage)
+    public function edit(Tag $tag)
     {
         //
     }
@@ -49,7 +51,7 @@ class HomePageController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, HomePage $homePage)
+    public function update(Request $request, Tag $tag)
     {
         //
     }
@@ -57,7 +59,7 @@ class HomePageController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(HomePage $homePage)
+    public function destroy(Tag $tag)
     {
         //
     }

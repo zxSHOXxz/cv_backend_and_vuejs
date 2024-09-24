@@ -72,6 +72,14 @@ Breadcrumbs::for('project-management.projects.index', function (BreadcrumbTrail 
     $trail->parent('project-management.index');
     $trail->push('Projects', route('projects.index'));
 });
+
+// Home > Dashboard > Project Management > Tags
+Breadcrumbs::for('project-management.tags.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('project-management.index');
+    $trail->push('Tags', route('tags.index'));
+});
+
+
 // Home > Dashboard > Project Management > Projects > [Project]
 Breadcrumbs::for('project-management.projects.show', function (BreadcrumbTrail $trail, Project $project) {
     $trail->parent('project-management.projects.index');
@@ -195,5 +203,5 @@ Breadcrumbs::for('home-page-management.home-page.index', function (BreadcrumbTra
 // Home > Dashboard > Home Page Management > Home Page > [Home Page]
 Breadcrumbs::for('home-page-management.home-pages.show', function (BreadcrumbTrail $trail, HomePage $home_page) {
     $trail->parent('home-page-management.home-page.index');
-    $trail->push(ucwords($home_page->name), route('home-pages.show', $home_page));
+    $trail->push(ucwords($home_page->name), route('home-page.show', $home_page));
 });

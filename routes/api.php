@@ -3,6 +3,7 @@
 use App\Actions\SamplePermissionApi;
 use App\Actions\SampleRoleApi;
 use App\Actions\SampleUserApi;
+use App\Http\Controllers\Api\FrontApi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -107,4 +108,15 @@ Route::prefix('v1')->group(function () {
     Route::delete('/permissions/{id}', function ($id) {
         return app(SamplePermissionApi::class)->delete($id);
     });
+});
+Route::prefix('v2')->group(function () {
+    Route::get('/homepage', [FrontApi::class, 'getHomePage']);
+    Route::get('/skills', [FrontApi::class, 'getSkills']);
+    Route::get('/services', [FrontApi::class, 'getServices']);
+    Route::get('/personal_informations', [FrontApi::class, 'getPersonalInformations']);
+    Route::get('/educations', [FrontApi::class, 'getEducations']);
+    Route::get('/experiences', [FrontApi::class, 'getExperiences']);
+    Route::get('/testimonials', [FrontApi::class, 'getTestimonials']);
+    Route::get('/projects', [FrontApi::class, 'getProjects']);
+    Route::get('/project/tags', [FrontApi::class, 'getProjectTags']);
 });

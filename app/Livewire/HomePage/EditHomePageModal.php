@@ -1,0 +1,126 @@
+<?php
+
+namespace App\Livewire\HomePage;
+
+use App\Models\HomePage;
+use Livewire\Component;
+use Livewire\WithFileUploads;
+
+class EditHomePageModal extends Component
+{
+
+    use WithFileUploads;
+
+    public $name;
+    public $tags = [];
+    public $images = [];
+
+    public $uploadedImages = [];
+
+    public $editedImages = [];
+
+    public $socials = [
+        'facebook' => '',
+        'github' => '',
+        'instagram' => '',
+        'linkedin' => '',
+        'whatsapp' => ''
+    ];
+
+    public $main_image;
+    public $tagify_edited;
+    public $editedMainImage;
+
+    public $home_page_id;
+    public $edit_mode;
+
+    protected $listeners = ['updateTagifyEdited'];
+
+    public function updateTagifyEdited($tags)
+    {
+        $this->tagify_edited = json_encode($tags);
+    }
+
+    protected $rules = [
+        'name' => 'required|string|max:255',
+        // 'tags' => 'required',
+        // 'uploadedImages.*' => 'image',
+        // 'socials.facebook' => 'nullable|url',
+        // 'socials.github' => 'nullable|url',
+        // 'socials.instagram' => 'nullable|url',
+        // 'socials.linkedin' => 'nullable|url',
+        // 'socials.whatsapp' => 'nullable|url',
+        // 'main_image' => 'required|image',
+    ];
+
+    public function submit()
+    {
+        // التحقق إذا تم تعديل الصورة الرئيسية أو الصور الأخرى قبل الـ validate
+        if ($this->editedMainImage != null) {
+            // إذا تم تعديل الصورة الرئيسية، استبدلها بالقيمة الجديدة لكي تتحقق الـ validate منها
+            $this->main_image = $this->editedMainImage;
+        }
+
+        if ($this->editedImages != null) {
+            // إذا تم تعديل الصور الأخرى، استبدلها بالقيمة الجديدة لكي تتحقق الـ validate منها
+            $this->uploadedImages = $this->editedImages;
+        }
+
+        // الآن تحقق من البيانات بعد استبدال الصور بالقيم الجديدة إن وجدت
+        $this->validate();
+
+        // إذا كانت هناك صورة رئيسية جديدة تم تعديلها بعد التحقق، قم بتخزينها
+        if ($this->editedMainImage != null) {
+            $mainImagePath = $this->editedMainImage->store('main_images', 'public');
+        } else {
+            // إذا لم يتم تعديل الصورة الرئيسية، احتفظ بالمسار القديم
+            $mainImagePath = $this->main_image;
+        }
+
+        // إذا تم تعديل الصور الأخرى بعد التحقق، قم بتخزينها
+        if ($this->editedImages != null) {
+            $imagePaths = [];
+            foreach ($this->editedImages as $image) {
+                $imagePaths[] = $image->store('gallery_images', 'public');
+            }
+
+            $encoded_images = json_encode($imagePaths);
+        } else {
+            $imagePaths = $this->uploadedImages;
+            $encoded_images = $imagePaths;
+        }
+
+        $home_page = HomePage::all()->first();
+        $home_page->update([
+            'name' => $this->name,
+            'tags' => json_encode($this->tagify_edited),
+            'images' => $encoded_images,
+            'socials' => json_encode($this->socials),
+            'main_image' => $mainImagePath,
+        ]);
+
+        // إعادة تعيين القيم بعد الحفظ
+        $this->reset(['name', 'tags', 'uploadedImages', 'socials', 'main_image', 'editedMainImage', 'editedImages']);
+
+        // إرسال رسالة نجاح
+        $this->dispatch('success', __('HomePage updated'));
+    }
+
+    public function render()
+    {
+
+        $home_page = HomePage::all()->first();
+
+        $this->home_page_id = $home_page->id;
+        $this->name = $home_page->name;
+        $this->uploadedImages = $home_page->images;
+        $this->main_image = $home_page->main_image;
+        $this->socials = json_decode($home_page->socials, true);
+        $this->tags = json_decode($home_page->tags, true);
+
+        $this->edit_mode = true;
+
+
+        return view('livewire.home-page.edit-home-page-modal', compact('home_page'));
+    }
+}
