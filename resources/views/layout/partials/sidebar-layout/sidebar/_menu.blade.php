@@ -305,36 +305,37 @@
             </div>
             <!--end:Menu item-->
 
-
-            <!--begin:Menu item-->
-            <div data-kt-menu-trigger="click"
-                class="menu-item menu-accordion {{ request()->routeIs('personal-information.*') ? 'here show' : '' }}">
-                <!--begin:Menu link-->
-                <span class="menu-link">
-                    <span class="menu-icon text-info">{!! getIcon('user', 'fs-2') !!}</span>
-                    <span class="menu-title"> Pesonal Informations Management</span>
-                    <span class="menu-arrow"></span>
-                </span>
-                <!--end:Menu link-->
-                <!--begin:Menu sub-->
-                <div class="menu-sub menu-sub-accordion">
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link {{ request()->routeIs('personal-information.index') ? 'active' : '' }}"
-                            href="{{ route('personal-information.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">List Pesonal Informations</span>
-                        </a>
-                        <!--end:Menu link-->
+            @can('read category')
+                <!--begin:Menu item-->
+                <div data-kt-menu-trigger="click"
+                    class="menu-item menu-accordion {{ request()->routeIs('personal-information.*') ? 'here show' : '' }}">
+                    <!--begin:Menu link-->
+                    <span class="menu-link">
+                        <span class="menu-icon text-info">{!! getIcon('user', 'fs-2') !!}</span>
+                        <span class="menu-title"> Pesonal Informations Management</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <!--end:Menu link-->
+                    <!--begin:Menu sub-->
+                    <div class="menu-sub menu-sub-accordion">
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link {{ request()->routeIs('personal-information.index') ? 'active' : '' }}"
+                                href="{{ route('personal-information.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">List Pesonal Informations</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
                     </div>
-                    <!--end:Menu item-->
+                    <!--end:Menu sub-->
                 </div>
-                <!--end:Menu sub-->
-            </div>
-            <!--end:Menu item-->
+                <!--end:Menu item-->
+            @endcan
 
 
             <!--begin:Menu item-->

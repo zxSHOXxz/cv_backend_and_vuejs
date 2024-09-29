@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class ExperienceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:create-experience', ['only' => ['create', 'store']]);
+        $this->middleware('can:read-experience', ['only' => ['show', 'index']]);
+        $this->middleware('can:edit-experience', ['only' => ['edit', 'update']]);
+        $this->middleware('can:delete-experience', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */

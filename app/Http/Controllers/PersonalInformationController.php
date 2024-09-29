@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class PersonalInformationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:create-personal-information', ['only' => ['create', 'store']]);
+        $this->middleware('can:read-personal-information', ['only' => ['show', 'index']]);
+        $this->middleware('can:edit-personal-information', ['only' => ['edit', 'update']]);
+        $this->middleware('can:delete-personal-information', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
