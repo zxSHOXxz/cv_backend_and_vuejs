@@ -10,10 +10,10 @@ class EductaionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:create-education', ['only' => ['create', 'store']]);
-        $this->middleware('can:read-education', ['only' => ['show', 'index']]);
-        $this->middleware('can:edit-education', ['only' => ['edit', 'update']]);
-        $this->middleware('can:delete-education', ['only' => ['destroy']]);
+        $this->middleware('can:create education', ['only' => ['create', 'store']]);
+        $this->middleware('can:read education', ['only' => ['show', 'index']]);
+        $this->middleware('can:edit education', ['only' => ['edit', 'update']]);
+        $this->middleware('can:delete education', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.

@@ -10,10 +10,10 @@ class ServiceController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:create-service', ['only' => ['create', 'store']]);
-        $this->middleware('can:read-service', ['only' => ['show', 'index']]);
-        $this->middleware('can:edit-service', ['only' => ['edit', 'update']]);
-        $this->middleware('can:delete-service', ['only' => ['destroy']]);
+        $this->middleware('can:create service', ['only' => ['create', 'store']]);
+        $this->middleware('can:read service', ['only' => ['show', 'index']]);
+        $this->middleware('can:edit service', ['only' => ['edit', 'update']]);
+        $this->middleware('can:delete service', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.

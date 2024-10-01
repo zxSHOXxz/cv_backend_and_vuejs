@@ -18,80 +18,28 @@
             <!--begin::Modal body-->
             <div class="modal-body px-5 my-7">
                 <!--begin::Form-->
-                <form id="kt_modal_add_user_form" class="form" action="#" wire:submit="submit"
-                    enctype="multipart/form-data">
+                <form id="kt_modal_add_user_form" class="form" wire:submit="submit" enctype="multipart/form-data">
                     <input type="hidden" wire:model="user_id" name="user_id" value="{{ $user_id }}" />
                     <!--begin::Scroll-->
                     <div class="d-flex flex-column scroll-y px-5 px-lg-10" id="kt_modal_add_user_scroll"
                         data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-max-height="auto"
                         data-kt-scroll-dependencies="#kt_modal_add_user_header"
                         data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
-                        <!--begin::Input group-->
-                        <div class="fv-row mb-7">
-                            <!--begin::Label-->
-                            <label class="d-block fw-semibold fs-6 mb-5">Avatar</label>
-                            <!--end::Label-->
-                            <!--begin::Image placeholder-->
-                            <style>
-                                .image-input-placeholder {
-                                    background-image: url('{{ image('svg/files/blank-image.svg') }}');
-                                }
 
-                                [data-bs-theme="dark"] .image-input-placeholder {
-                                    background-image: url('{{ image('svg/files/blank-image-dark.svg') }}');
-                                }
-                            </style>
-                            <!--end::Image placeholder-->
-                            <!--begin::Image input-->
-                            <div class="image-input image-input-outline image-input-placeholder {{ $avatar || $saved_avatar ? '' : 'image-input-empty' }}"
-                                data-kt-image-input="true">
-                                <!--begin::Preview existing avatar-->
-                                @if ($avatar)
-                                    <div class="image-input-wrapper w-125px h-125px"
-                                        style="background-image: url({{ $avatar ? $avatar->temporaryUrl() : '' }});">
-                                    </div>
-                                @else
-                                    <div class="image-input-wrapper w-125px h-125px"
-                                        style="background-image: url({{ $saved_avatar }});"></div>
-                                @endif
-                                <!--end::Preview existing avatar-->
-                                <!--begin::Label-->
-                                <label
-                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                    data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
-                                    {!! getIcon('pencil', 'fs-7') !!}
-                                    <!--begin::Inputs-->
-                                    <input type="file" wire:model="avatar" name="avatar"
-                                        accept=".png, .jpg, .jpeg" />
-                                    <input type="hidden" name="avatar_remove" />
-                                    <!--end::Inputs-->
-                                </label>
-                                <!--end::Label-->
-                                <!--begin::Cancel-->
-                                <span
-                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                    data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
-                                    {!! getIcon('cross', 'fs-2') !!}
-                                </span>
-                                <!--end::Cancel-->
-                                <!--begin::Remove-->
-                                <span
-                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                    data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
-                                    {!! getIcon('cross', 'fs-2') !!}
-                                </span>
-                                <!--end::Remove-->
-                            </div>
-                            <!--end::Image input-->
-                            <!--begin::Hint-->
-                            <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
-                            <!--end::Hint-->
+                        <div class="fv-row mb-7">
+                            @if ($avatar)
+                                <div class="image-container mb-5">
+                                    <img style="width: 180px;border-radius: 25px" src="{{ $avatar->temporaryUrl() }}">
+                                </div>
+                            @endif
+
+                            <label class="required fw-semibold fs-6 mb-2">avatar</label>
+                            <input type="file" wire:model="avatar" name="avatar"
+                                class="form-control form-control-solid mb-3 mb-lg-0" />
                             @error('avatar')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                        <!--end::Input group-->
-
 
                         <!--begin::Input group-->
                         <div class="fv-row mb-7">
@@ -108,7 +56,6 @@
                         </div>
                         <!--end::Input group-->
 
-
                         <!--begin::Input group-->
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
@@ -124,7 +71,23 @@
                         </div>
                         <!--end::Input group-->
 
-                        
+
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="required fw-semibold fs-6 mb-2">Password</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="password" wire:model="password" name="password"
+                                class="form-control form-control-solid mb-3 mb-lg-0" placeholder="example@domain.com" />
+                            <!--end::Input-->
+                            @error('password')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <!--end::Input group-->
+
+
                         <!--begin::Input group-->
                         <div class="mb-7">
                             <!--begin::Label-->

@@ -10,10 +10,10 @@ class HomePageController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:create-home-page', ['only' => ['create', 'store']]);
-        $this->middleware('can:read-home-page', ['only' => ['show', 'index']]);
-        $this->middleware('can:edit-home-page', ['only' => ['edit', 'update']]);
-        $this->middleware('can:delete-home-page', ['only' => ['destroy']]);
+        $this->middleware('can:create home page', ['only' => ['create', 'store']]);
+        $this->middleware('can:read home page', ['only' => ['show', 'index']]);
+        $this->middleware('can:edit home page', ['only' => ['edit', 'update']]);
+        $this->middleware('can:delete home page', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.

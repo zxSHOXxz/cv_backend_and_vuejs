@@ -10,10 +10,10 @@ class TagController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:create-tag', ['only' => ['create', 'store']]);
-        $this->middleware('can:read-tag', ['only' => ['show', 'index']]);
-        $this->middleware('can:edit-tag', ['only' => ['edit', 'update']]);
-        $this->middleware('can:delete-tag', ['only' => ['destroy']]);
+        $this->middleware('can:create tag', ['only' => ['create', 'store']]);
+        $this->middleware('can:read tag', ['only' => ['show', 'index']]);
+        $this->middleware('can:edit tag', ['only' => ['edit', 'update']]);
+        $this->middleware('can:delete tag', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.

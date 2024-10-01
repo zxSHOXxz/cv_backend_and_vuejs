@@ -72,240 +72,250 @@
                 <!--end:Menu content-->
             </div>
             <!--end:Menu Apps item-->
-
-            <!--begin:Menu item-->
-            <div data-kt-menu-trigger="click"
-                class="menu-item menu-accordion {{ request()->routeIs('user-management.*') ? 'here show' : '' }}">
-                <!--begin:Menu link-->
-                <span class="menu-link">
-                    <span class="menu-icon">{!! getIcon('people', 'fs-2') !!}</span>
-                    <span class="menu-title">User Management</span>
-                    <span class="menu-arrow"></span>
-                </span>
-                <!--end:Menu link-->
-                <!--begin:Menu sub-->
-                <div class="menu-sub menu-sub-accordion">
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link {{ request()->routeIs('user-management.users.*') ? 'active' : '' }}"
-                            href="{{ route('user-management.users.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Users</span>
-                        </a>
-                        <!--end:Menu link-->
+            @can('read user')
+                <!--begin:Menu item-->
+                <div data-kt-menu-trigger="click"
+                    class="menu-item menu-accordion {{ request()->routeIs('user-management.*') ? 'here show' : '' }}">
+                    <!--begin:Menu link-->
+                    <span class="menu-link">
+                        <span class="menu-icon">{!! getIcon('people', 'fs-2') !!}</span>
+                        <span class="menu-title">User Management</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <!--end:Menu link-->
+                    <!--begin:Menu sub-->
+                    <div class="menu-sub menu-sub-accordion">
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link {{ request()->routeIs('user-management.users.*') ? 'active' : '' }}"
+                                href="{{ route('user-management.users.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Users</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link {{ request()->routeIs('user-management.roles.*') ? 'active' : '' }}"
+                                href="{{ route('user-management.roles.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Roles</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link {{ request()->routeIs('user-management.permissions.*') ? 'active' : '' }}"
+                                href="{{ route('user-management.permissions.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Permissions</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
                     </div>
-                    <!--end:Menu item-->
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link {{ request()->routeIs('user-management.roles.*') ? 'active' : '' }}"
-                            href="{{ route('user-management.roles.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Roles</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link {{ request()->routeIs('user-management.permissions.*') ? 'active' : '' }}"
-                            href="{{ route('user-management.permissions.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Permissions</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
+                    <!--end:Menu sub-->
                 </div>
-                <!--end:Menu sub-->
-            </div>
-            <!--end:Menu item-->
+                <!--end:Menu item-->
+            @endcan
 
-            <!--begin:Menu item-->
-            <div data-kt-menu-trigger="click"
-                class="menu-item menu-accordion {{ request()->routeIs('projects.*') || request()->routeIs('tags.*') ? 'here show' : '' }}">
-                <!--begin:Menu link-->
-                <span class="menu-link">
-                    <span class="menu-icon">{!! getIcon('package', 'fs-2') !!}</span>
-                    <span class="menu-title">Project Management</span>
-                    <span class="menu-arrow"></span>
-                </span>
-                <!--end:Menu link-->
-                <!--begin:Menu sub-->
-                <div class="menu-sub menu-sub-accordion">
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link {{ request()->routeIs('projects.*') ? 'active' : '' }}"
-                            href="{{ route('projects.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Projects</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
+            @can('read project')
+                <!--begin:Menu item-->
+                <div data-kt-menu-trigger="click"
+                    class="menu-item menu-accordion {{ request()->routeIs('projects.*') || request()->routeIs('tags.*') ? 'here show' : '' }}">
+                    <!--begin:Menu link-->
+                    <span class="menu-link">
+                        <span class="menu-icon">{!! getIcon('package', 'fs-2') !!}</span>
+                        <span class="menu-title">Project Management</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <!--end:Menu link-->
+                    <!--begin:Menu sub-->
+                    <div class="menu-sub menu-sub-accordion">
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link {{ request()->routeIs('projects.*') ? 'active' : '' }}"
+                                href="{{ route('projects.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Projects</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
 
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link {{ request()->routeIs('tags.*') ? 'active' : '' }}"
-                            href="{{ route('tags.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Tags</span>
-                        </a>
-                        <!--end:Menu link-->
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link {{ request()->routeIs('tags.*') ? 'active' : '' }}"
+                                href="{{ route('tags.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Tags</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
                     </div>
-                    <!--end:Menu item-->
+                    <!--end:Menu sub-->
                 </div>
-                <!--end:Menu sub-->
-            </div>
-            <!--end:Menu item-->
+                <!--end:Menu item-->
+            @endcan
 
-            <!--begin:Menu item-->
-            <div data-kt-menu-trigger="click"
-                class="menu-item menu-accordion {{ request()->routeIs('home-page.*') ? 'here show' : '' }}">
-                <!--begin:Menu link-->
-                <span class="menu-link">
-                    <span class="menu-icon">{!! getIcon('home', 'fs-2') !!}</span>
-                    <span class="menu-title">Home Page</span>
-                    <span class="menu-arrow"></span>
-                </span>
-                <!--end:Menu link-->
-                <!--begin:Menu sub-->
-                <div class="menu-sub menu-sub-accordion">
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link {{ request()->routeIs('home-page.index') ? 'active' : '' }}"
-                            href="{{ route('home-page.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">List Pages</span>
-                        </a>
-                        <!--end:Menu link-->
-                        <!--begin:Menu link-->
-                        <a class="menu-link {{ request()->routeIs('home-page.show') ? 'active' : '' }}"
-                            href="{{ route('home-page.show') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Show Home Page</span>
-                        </a>
-                        <!--end:Menu link-->
+            @can('read home page')
+                <!--begin:Menu item-->
+                <div data-kt-menu-trigger="click"
+                    class="menu-item menu-accordion {{ request()->routeIs('home-page.*') ? 'here show' : '' }}">
+                    <!--begin:Menu link-->
+                    <span class="menu-link">
+                        <span class="menu-icon">{!! getIcon('home', 'fs-2') !!}</span>
+                        <span class="menu-title">Home Page</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <!--end:Menu link-->
+
+                    <!--begin:Menu sub-->
+                    <div class="menu-sub menu-sub-accordion">
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link {{ request()->routeIs('home-page.index') ? 'active' : '' }}"
+                                href="{{ route('home-page.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">List Pages</span>
+                            </a>
+                            <!--end:Menu link-->
+                            <!--begin:Menu link-->
+                            <a class="menu-link {{ request()->routeIs('home-page.show') ? 'active' : '' }}"
+                                href="{{ route('home-page.show') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Show Home Page</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
                     </div>
-                    <!--end:Menu item-->
+                    <!--end:Menu sub-->
                 </div>
-                <!--end:Menu sub-->
-            </div>
-            <!--end:Menu item-->
+                <!--end:Menu item-->
+            @endcan
 
 
-            <!--begin:Menu item-->
-            <div data-kt-menu-trigger="click"
-                class="menu-item menu-accordion {{ request()->routeIs('testimonials.*') ? 'here show' : '' }}">
-                <!--begin:Menu link-->
-                <span class="menu-link">
-                    <span class="menu-icon">{!! getIcon('address-book', 'fs-2') !!}</span>
-                    <span class="menu-title">Testimonials Management</span>
-                    <span class="menu-arrow"></span>
-                </span>
-                <!--end:Menu link-->
-                <!--begin:Menu sub-->
-                <div class="menu-sub menu-sub-accordion">
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link {{ request()->routeIs('testimonials.index') ? 'active' : '' }}"
-                            href="{{ route('testimonials.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">List Testimonials</span>
-                        </a>
-                        <!--end:Menu link-->
+            @can('read testimonial')
+                <!--begin:Menu item-->
+                <div data-kt-menu-trigger="click"
+                    class="menu-item menu-accordion {{ request()->routeIs('testimonials.*') ? 'here show' : '' }}">
+                    <!--begin:Menu link-->
+                    <span class="menu-link">
+                        <span class="menu-icon">{!! getIcon('address-book', 'fs-2') !!}</span>
+                        <span class="menu-title">Testimonials Management</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <!--end:Menu link-->
+                    <!--begin:Menu sub-->
+                    <div class="menu-sub menu-sub-accordion">
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link {{ request()->routeIs('testimonials.index') ? 'active' : '' }}"
+                                href="{{ route('testimonials.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">List Testimonials</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
                     </div>
-                    <!--end:Menu item-->
+                    <!--end:Menu sub-->
                 </div>
-                <!--end:Menu sub-->
-            </div>
-            <!--end:Menu item-->
+                <!--end:Menu item-->
+            @endcan
 
-
-            <!--begin:Menu item-->
-            <div data-kt-menu-trigger="click"
-                class="menu-item menu-accordion {{ request()->routeIs('skills.*') ? 'here show' : '' }}">
-                <!--begin:Menu link-->
-                <span class="menu-link">
-                    <span class="menu-icon">{!! getIcon('code', 'fs-2') !!}</span>
-                    <span class="menu-title">Skills Management</span>
-                    <span class="menu-arrow"></span>
-                </span>
-                <!--end:Menu link-->
-                <!--begin:Menu sub-->
-                <div class="menu-sub menu-sub-accordion">
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link {{ request()->routeIs('skills.index') ? 'active' : '' }}"
-                            href="{{ route('skills.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">List Skills</span>
-                        </a>
-                        <!--end:Menu link-->
+            @can('read skill')
+                <!--begin:Menu item-->
+                <div data-kt-menu-trigger="click"
+                    class="menu-item menu-accordion {{ request()->routeIs('skills.*') ? 'here show' : '' }}">
+                    <!--begin:Menu link-->
+                    <span class="menu-link">
+                        <span class="menu-icon">{!! getIcon('code', 'fs-2') !!}</span>
+                        <span class="menu-title">Skills Management</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <!--end:Menu link-->
+                    <!--begin:Menu sub-->
+                    <div class="menu-sub menu-sub-accordion">
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link {{ request()->routeIs('skills.index') ? 'active' : '' }}"
+                                href="{{ route('skills.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">List Skills</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
                     </div>
-                    <!--end:Menu item-->
+                    <!--end:Menu sub-->
                 </div>
-                <!--end:Menu sub-->
-            </div>
-            <!--end:Menu item-->
+                <!--end:Menu item-->
+            @endcan
 
-
-            <!--begin:Menu item-->
-            <div data-kt-menu-trigger="click"
-                class="menu-item menu-accordion {{ request()->routeIs('services.*') ? 'here show' : '' }}">
-                <!--begin:Menu link-->
-                <span class="menu-link">
-                    <span class="menu-icon">{!! getIcon('dropbox', 'fs-2') !!}</span>
-                    <span class="menu-title"> Services Management</span>
-                    <span class="menu-arrow"></span>
-                </span>
-                <!--end:Menu link-->
-                <!--begin:Menu sub-->
-                <div class="menu-sub menu-sub-accordion">
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link {{ request()->routeIs('services.index') ? 'active' : '' }}"
-                            href="{{ route('services.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">List Services</span>
-                        </a>
-                        <!--end:Menu link-->
+            @can('read service')
+                <!--begin:Menu item-->
+                <div data-kt-menu-trigger="click"
+                    class="menu-item menu-accordion {{ request()->routeIs('services.*') ? 'here show' : '' }}">
+                    <!--begin:Menu link-->
+                    <span class="menu-link">
+                        <span class="menu-icon">{!! getIcon('dropbox', 'fs-2') !!}</span>
+                        <span class="menu-title"> Services Management</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <!--end:Menu link-->
+                    <!--begin:Menu sub-->
+                    <div class="menu-sub menu-sub-accordion">
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link {{ request()->routeIs('services.index') ? 'active' : '' }}"
+                                href="{{ route('services.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">List Services</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
                     </div>
-                    <!--end:Menu item-->
+                    <!--end:Menu sub-->
                 </div>
-                <!--end:Menu sub-->
-            </div>
-            <!--end:Menu item-->
+                <!--end:Menu item-->
+            @endcan
 
-            @can('read category')
+            @can('read personal information')
                 <!--begin:Menu item-->
                 <div data-kt-menu-trigger="click"
                     class="menu-item menu-accordion {{ request()->routeIs('personal-information.*') ? 'here show' : '' }}">
@@ -337,68 +347,69 @@
                 <!--end:Menu item-->
             @endcan
 
-
-            <!--begin:Menu item-->
-            <div data-kt-menu-trigger="click"
-                class="menu-item menu-accordion {{ request()->routeIs('experiences.*') ? 'here show' : '' }}">
-                <!--begin:Menu link-->
-                <span class="menu-link">
-                    <span class="menu-icon">{!! getIcon('diamonds', 'fs-2') !!}</span>
-                    <span class="menu-title">Experiences Management</span>
-                    <span class="menu-arrow"></span>
-                </span>
-                <!--end:Menu link-->
-                <!--begin:Menu sub-->
-                <div class="menu-sub menu-sub-accordion">
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link {{ request()->routeIs('experiences.index') ? 'active' : '' }}"
-                            href="{{ route('experiences.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">List Experiences</span>
-                        </a>
-                        <!--end:Menu link-->
+            @can('read experience')
+                <!--begin:Menu item-->
+                <div data-kt-menu-trigger="click"
+                    class="menu-item menu-accordion {{ request()->routeIs('experiences.*') ? 'here show' : '' }}">
+                    <!--begin:Menu link-->
+                    <span class="menu-link">
+                        <span class="menu-icon">{!! getIcon('diamonds', 'fs-2') !!}</span>
+                        <span class="menu-title">Experiences Management</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <!--end:Menu link-->
+                    <!--begin:Menu sub-->
+                    <div class="menu-sub menu-sub-accordion">
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link {{ request()->routeIs('experiences.index') ? 'active' : '' }}"
+                                href="{{ route('experiences.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">List Experiences</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
                     </div>
-                    <!--end:Menu item-->
+                    <!--end:Menu sub-->
                 </div>
-                <!--end:Menu sub-->
-            </div>
-            <!--end:Menu item-->
+                <!--end:Menu item-->
+            @endcan
 
-            <!--begin:Menu item-->
-            <div data-kt-menu-trigger="click"
-                class="menu-item menu-accordion {{ request()->routeIs('educations.*') ? 'here show' : '' }}">
-                <!--begin:Menu link-->
-                <span class="menu-link">
-                    <span class="menu-icon">{!! getIcon('book-open', 'fs-2') !!}</span>
-                    <span class="menu-title">Education Management</span>
-                    <span class="menu-arrow"></span>
-                </span>
-                <!--end:Menu link-->
-                <!--begin:Menu sub-->
-                <div class="menu-sub menu-sub-accordion">
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link {{ request()->routeIs('educations.index') ? 'active' : '' }}"
-                            href="{{ route('educations.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">List Educations</span>
-                        </a>
-                        <!--end:Menu link-->
+            @can('read education')
+                <!--begin:Menu item-->
+                <div data-kt-menu-trigger="click"
+                    class="menu-item menu-accordion {{ request()->routeIs('educations.*') ? 'here show' : '' }}">
+                    <!--begin:Menu link-->
+                    <span class="menu-link">
+                        <span class="menu-icon">{!! getIcon('book-open', 'fs-2') !!}</span>
+                        <span class="menu-title">Education Management</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <!--end:Menu link-->
+                    <!--begin:Menu sub-->
+                    <div class="menu-sub menu-sub-accordion">
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link {{ request()->routeIs('educations.index') ? 'active' : '' }}"
+                                href="{{ route('educations.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">List Educations</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
                     </div>
-                    <!--end:Menu item-->
+                    <!--end:Menu sub-->
                 </div>
-                <!--end:Menu sub-->
-            </div>
-            <!--end:Menu item-->
-
-
+                <!--end:Menu item-->
+            @endcan
 
             {{--
             <!--begin:Menu item-->

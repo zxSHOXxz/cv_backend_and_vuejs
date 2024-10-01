@@ -10,10 +10,10 @@ class TestimonialController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:create-testimonial', ['only' => ['create', 'store']]);
-        $this->middleware('can:read-testimonial', ['only' => ['show', 'index']]);
-        $this->middleware('can:edit-testimonial', ['only' => ['edit', 'update']]);
-        $this->middleware('can:delete-testimonial', ['only' => ['destroy']]);
+        $this->middleware('can:create testimonial', ['only' => ['create', 'store']]);
+        $this->middleware('can:read testimonial', ['only' => ['show', 'index']]);
+        $this->middleware('can:edit testimonial', ['only' => ['edit', 'update']]);
+        $this->middleware('can:delete testimonial', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.

@@ -21,6 +21,7 @@ class AddUserModal extends Component
     public $role;
     public $avatar;
     public $saved_avatar;
+    public $password;
 
     public $edit_mode = false;
 
@@ -28,7 +29,8 @@ class AddUserModal extends Component
         'name' => 'required|string',
         'email' => 'required|email',
         'role' => 'required|string',
-        'avatar' => 'nullable|sometimes|image|max:1024',
+        'password' => 'required|string',
+        'avatar' => 'required|image|max:1024',
     ];
 
     protected $listeners = [
@@ -43,10 +45,7 @@ class AddUserModal extends Component
 
         $roles_description = [
             'administrator' => 'Best for business owners and company administrators',
-            'developer' => 'Best for developers or people primarily using the API',
-            'analyst' => 'Best for people who need full access to analytics data, but don\'t need to update business settings',
-            'support' => 'Best for employees who regularly refund payments and respond to disputes',
-            'trial' => 'Best for people who need to preview content data, but don\'t need to make any updates',
+            'editor' => 'Best for developers or people primarily using the API',
         ];
 
         foreach ($roles as $i => $role) {
@@ -58,55 +57,39 @@ class AddUserModal extends Component
 
     public function submit()
     {
-        // Validate the form input data
         $this->validate();
 
         DB::transaction(function () {
-            // Prepare the data for creating a new user
             $data = [
                 'name' => $this->name,
+                'password' => Hash::make($this->password),
             ];
 
             if ($this->avatar) {
-                $data['profile_photo_path'] = $this->avatar->store('avatars', 'public');
+                $data['avatar'] = $this->avatar->store('avatar', 'public');
+                $data['profile_photo_path'] = $this->avatar->store('avatar', 'public');
             } else {
-                $data['profile_photo_path'] = null;
+                $data['avatar'] = null;
             }
 
-            if (!$this->edit_mode) {
-                $data['password'] = Hash::make($this->email);
-            }
-
-            // Update or Create a new user record in the database
             $data['email'] = $this->email;
-            $user = User::find($this->user_id) ?? User::create($data);
+            $user = new User();
+            $user->name = $data['name'];
+            $user->password = $data['password'];
+            $user->email = $data['email'];
+            $user->avatar = $data['avatar'];
+            $user->profile_photo_path = $data['profile_photo_path'];
+            $user->save();
 
-            if ($this->edit_mode) {
-                foreach ($data as $k => $v) {
-                    $user->$k = $v;
-                }
-                $user->save();
-            }
+            $user->assignRole($this->role);
+            $this->dispatch('success', __('New user created'));
+            // if ($this->edit_mode) {
+            //     $user->syncRoles($this->role);
 
-            if ($this->edit_mode) {
-                // Assign selected role for user
-                $user->syncRoles($this->role);
-
-                // Emit a success event with a message
-                $this->dispatch('success', __('User updated'));
-            } else {
-                // Assign selected role for user
-                $user->assignRole($this->role);
-
-                // Send a password reset link to the user's email
-                Password::sendResetLink($user->only('email'));
-
-                // Emit a success event with a message
-                $this->dispatch('success', __('New user created'));
-            }
+            //     $this->dispatch('success', __('User updated'));
+            // } else {
+            // }
         });
-
-        // Reset the form fields after successful submission
         $this->reset();
     }
 
@@ -132,7 +115,7 @@ class AddUserModal extends Component
         $user = User::find($id);
 
         $this->user_id = $user->id;
-        $this->saved_avatar = $user->profile_photo_url;
+        $this->saved_avatar = $user->profile_photo_path;
         $this->name = $user->name;
         $this->email = $user->email;
         $this->role = $user->roles?->first()->name ?? '';
@@ -142,6 +125,8 @@ class AddUserModal extends Component
     {
         $this->resetErrorBag();
         $this->resetValidation();
-        $this->reset();
+        $this->name = $this->name;
+        $this->email = $this->email;
+        $this->role = $this->role;
     }
 }

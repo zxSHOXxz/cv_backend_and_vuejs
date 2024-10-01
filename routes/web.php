@@ -54,6 +54,9 @@ Route::get('/error', function () {
     abort(500);
 });
 
-Route::get('/auth/redirect/{provider}', [SocialiteController::class, 'redirect']);
+Route::get('/google/redirect', [SocialiteController::class, 'redirectToGoogle'])->name('google.redirect');
+Route::get('/google/callback', [SocialiteController::class, 'handleGoogleCallback'])->name('google.callback');
+
+
 
 require __DIR__ . '/auth.php';

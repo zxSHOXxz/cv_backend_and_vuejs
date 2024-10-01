@@ -4,51 +4,30 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Verified;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 
 class SocialiteController extends Controller
 {
-    public function redirect($provider)
+    public function redirectToGoogle()
     {
-        // redirect from social site
-        if (request()->input('state')) {
-            // already logged in
-            // get user info from social site
-            $user = Socialite::driver($provider)->stateless()->user();
-
-            // check for existing user
-            $existingUser = User::where('email', $user->getEmail())->first();
-
-            if ($existingUser) {
-                auth()->login($existingUser, true);
-
-                return redirect()->to('/');
-            }
-
-            $newUser = $this->createUser($user);
-            auth()->login($newUser, true);
-        }
-
-        // request login from social site
-        return Socialite::driver($provider)->redirect();
+        return Socialite::driver('google')->redirect();
     }
 
 
-    function createUser($user)
+    public function handleGoogleCallback()
     {
-        $user = User::updateOrCreate([
-            'email' => $user->getEmail(),
-        ], [
-            'name'     => $user->getName(),
-            'password' => '',
-            'avatar'   => $user->getAvatar(),
-        ]);
-
-        if ($user->markEmailAsVerified()) {
-            event(new Verified($user));
+        $googleUser = Socialite::driver('google')->stateless()->user();
+        $user = User::where('email', $googleUser->email)->first();
+        if (!$user) {
+            $user = User::create(['name' => $googleUser->name, 'email' => $googleUser->email, 'password' => \Hash::make('password')]);
         }
 
-        return $user;
+        Auth::login($user);
+
+        return redirect(RouteServiceProvider::HOME);
     }
 }

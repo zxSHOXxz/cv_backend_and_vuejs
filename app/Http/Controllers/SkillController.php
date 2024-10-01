@@ -10,10 +10,10 @@ class SkillController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:create-skill', ['only' => ['create', 'store']]);
-        $this->middleware('can:read-skill', ['only' => ['show', 'index']]);
-        $this->middleware('can:edit-skill', ['only' => ['edit', 'update']]);
-        $this->middleware('can:delete-skill', ['only' => ['destroy']]);
+        $this->middleware('can:create skill', ['only' => ['create', 'store']]);
+        $this->middleware('can:read skill', ['only' => ['show', 'index']]);
+        $this->middleware('can:edit skill', ['only' => ['edit', 'update']]);
+        $this->middleware('can:delete skill', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
