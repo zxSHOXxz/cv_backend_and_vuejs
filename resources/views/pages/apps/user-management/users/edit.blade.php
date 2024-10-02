@@ -81,18 +81,19 @@
                             <!--begin::Details item-->
                             <div class="fw-bold mt-5">Address</div>
                             <div class="text-gray-600">
-                                {{ $user->addresses()->first()->address_line_1 }}
-                                {{ $user->addresses()->first()->address_line_2 ? '<br>' : null }}
-                                {{ $user->addresses()->first()->address_line_2 }}
-                                <br>
-                                {{ $user->addresses()->first()->city }}
-                                <br>
-                                {{ $user->addresses()->first()->postal_code }}
-                                <br>
-                                {{ $user->addresses()->first()->state }}
-                                <br>
-                                {{ $user->addresses()->first()->country }}
-
+                                @isset($user->getDefaultAddressAttribute()->address_line_1)
+                                    {{ $user->getDefaultAddressAttribute()->address_line_1 }}
+                                    {{ $user->getDefaultAddressAttribute()->address_line_2 ? '<br>' : null }}
+                                    {{ $user->getDefaultAddressAttribute()->address_line_2 }}
+                                    <br>
+                                    {{ $user->getDefaultAddressAttribute()->city }}
+                                    <br>
+                                    {{ $user->getDefaultAddressAttribute()->postal_code }}
+                                    <br>
+                                    {{ $user->getDefaultAddressAttribute()->state }}
+                                    <br>
+                                    {{ $user->getDefaultAddressAttribute()->country }}
+                                @endisset
                             </div>
                             <!--begin::Details item-->
                             <div class="fw-bold mt-5">Last Login</div>
@@ -175,23 +176,9 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Role</td>
+                                            <td>Name</td>
                                             <td>
-                                                @foreach ($user->roles as $role)
-                                                    <div class="badge badge-lg badge-light-primary d-inline">
-                                                        {{ ucwords($role->name) }}
-                                                    </div>
-                                                @endforeach
-                                            </td>
-                                            <td class="text-end">
-                                                <button type="button"
-                                                    class="btn btn-icon btn-active-light-primary w-30px h-30px ms-auto"
-                                                    data-bs-toggle="modal" data-bs-target="#kt_modal_update_role">
-                                                    <i class="ki-duotone ki-pencil fs-3">
-                                                        <span class="path1"></span>
-                                                        <span class="path2"></span>
-                                                    </i>
-                                                </button>
+                                                {{ $user->name }}
                                             </td>
                                         </tr>
                                     </tbody>
@@ -550,7 +537,8 @@
     {{-- @include('pages/apps/user-management/users/modals/_add-one-time-password') --}}
     <!--end::Modal - Add one time password-->
     <!--begin::Modal - Update email-->
-    @include('pages/apps/user-management/users/modals/_update-email')
+    {{-- @include('pages/apps/user-management/users/modals/_update-email') --}}
+    <livewire:user.edit-user-email-modal></livewire:user.edit-user-email-modal>
     <!--end::Modal - Update email-->
     <!--begin::Modal - Update password-->
     @include('pages/apps/user-management/users/modals/_update-password')

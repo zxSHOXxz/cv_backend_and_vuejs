@@ -116,6 +116,7 @@
                                 <!--end::Image input wrapper-->
                             </div>
                             <!--end::Input group-->
+
                             <!--begin::Input group-->
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
@@ -123,103 +124,14 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <input type="text" class="form-control form-control-solid" placeholder=""
-                                    name="name" value="Emma Smith" />
+                                    name="name" value="{{ $user->name }}" />
                                 <!--end::Input-->
                             </div>
                             <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-7">
-                                <!--begin::Label-->
-                                <label class="fs-6 fw-semibold mb-2">
-                                    <span>Email</span>
-                                    <span class="ms-1" data-bs-toggle="tooltip" title="Email address must be active">
-                                        <i class="ki-duotone ki-information fs-7">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                            <span class="path3"></span>
-                                        </i>
-                                    </span>
-                                </label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
-                                <input type="email" class="form-control form-control-solid" placeholder=""
-                                    name="email" value="smith@kpmg.com" />
-                                <!--end::Input-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-7">
-                                <!--begin::Label-->
-                                <label class="fs-6 fw-semibold mb-2">Description</label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
-                                <input type="text" class="form-control form-control-solid" placeholder=""
-                                    name="description" />
-                                <!--end::Input-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-15">
-                                <!--begin::Label-->
-                                <label class="fs-6 fw-semibold mb-2">Language</label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
-                                <select name="language" aria-label="Select a Language" data-control="select2"
-                                    data-placeholder="Select a Language..." class="form-select form-select-solid"
-                                    data-dropdown-parent="#kt_modal_update_details">
-                                    <option></option>
-                                    <option value="id">Bahasa Indonesia - Indonesian</option>
-                                    <option value="msa">Bahasa Melayu - Malay</option>
-                                    <option value="ca">Català - Catalan</option>
-                                    <option value="cs">Čeština - Czech</option>
-                                    <option value="da">Dansk - Danish</option>
-                                    <option value="de">Deutsch - German</option>
-                                    <option value="en">English</option>
-                                    <option value="en-gb">English UK - British English</option>
-                                    <option value="es">Español - Spanish</option>
-                                    <option value="fil">Filipino</option>
-                                    <option value="fr">Français - French</option>
-                                    <option value="ga">Gaeilge - Irish (beta)</option>
-                                    <option value="gl">Galego - Galician (beta)</option>
-                                    <option value="hr">Hrvatski - Croatian</option>
-                                    <option value="it">Italiano - Italian</option>
-                                    <option value="hu">Magyar - Hungarian</option>
-                                    <option value="nl">Nederlands - Dutch</option>
-                                    <option value="no">Norsk - Norwegian</option>
-                                    <option value="pl">Polski - Polish</option>
-                                    <option value="pt">Português - Portuguese</option>
-                                    <option value="ro">Română - Romanian</option>
-                                    <option value="sk">Slovenčina - Slovak</option>
-                                    <option value="fi">Suomi - Finnish</option>
-                                    <option value="sv">Svenska - Swedish</option>
-                                    <option value="vi">Tiếng Việt - Vietnamese</option>
-                                    <option value="tr">Türkçe - Turkish</option>
-                                    <option value="el">Ελληνικά - Greek</option>
-                                    <option value="bg">Български език - Bulgarian</option>
-                                    <option value="ru">Русский - Russian</option>
-                                    <option value="sr">Српски - Serbian</option>
-                                    <option value="uk">Українська мова - Ukrainian</option>
-                                    <option value="he">עִבְרִית - Hebrew</option>
-                                    <option value="ur">اردو - Urdu (beta)</option>
-                                    <option value="ar">العربية - Arabic</option>
-                                    <option value="fa">فارسی - Persian</option>
-                                    <option value="mr">मराठी - Marathi</option>
-                                    <option value="hi">हिन्दी - Hindi</option>
-                                    <option value="bn">বাংলা - Bangla</option>
-                                    <option value="gu">ગુજરાતી - Gujarati</option>
-                                    <option value="ta">தமிழ் - Tamil</option>
-                                    <option value="kn">ಕನ್ನಡ - Kannada</option>
-                                    <option value="th">ภาษาไทย - Thai</option>
-                                    <option value="ko">한국어 - Korean</option>
-                                    <option value="ja">日本語 - Japanese</option>
-                                    <option value="zh-cn">简体中文 - Simplified Chinese</option>
-                                    <option value="zh-tw">繁體中文 - Traditional Chinese</option>
-                                </select>
-                                <!--end::Input-->
-                            </div>
-                            <!--end::Input group-->
+
                         </div>
                         <!--end::User form-->
+
                         <!--begin::Address toggle-->
                         <div class="fw-bolder fs-3 rotate collapsible mb-7" data-bs-toggle="collapse"
                             href="#kt_modal_update_user_address" role="button" aria-expanded="false"
@@ -230,6 +142,7 @@
                             </span>
                         </div>
                         <!--end::Address toggle-->
+
                         <!--begin::Address form-->
                         <div id="kt_modal_update_user_address" class="collapse show">
                             <!--begin::Input group-->
@@ -239,7 +152,7 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <input class="form-control form-control-solid" placeholder="" name="address1"
-                                    value="101, Collins Street" />
+                                    value="{{ $user->getDefaultAddressAttribute()->address_line_1 ?? null }}" />
                                 <!--end::Input-->
                             </div>
                             <!--end::Input group-->
@@ -249,7 +162,8 @@
                                 <label class="fs-6 fw-semibold mb-2">Address Line 2</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input class="form-control form-control-solid" placeholder="" name="address2" />
+                                <input class="form-control form-control-solid" placeholder="" name="address2"
+                                    value=" {{ $user->getDefaultAddressAttribute()->address_line_2 ?? null }} " />
                                 <!--end::Input-->
                             </div>
                             <!--end::Input group-->
@@ -260,7 +174,7 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <input class="form-control form-control-solid" placeholder="" name="city"
-                                    value="Melbourne" />
+                                    value="{{ $user->getDefaultAddressAttribute()->city ?? null }}" />
                                 <!--end::Input-->
                             </div>
                             <!--end::Input group-->
@@ -273,7 +187,7 @@
                                     <!--end::Label-->
                                     <!--begin::Input-->
                                     <input class="form-control form-control-solid" placeholder="" name="state"
-                                        value="Victoria" />
+                                        value="{{ $user->getDefaultAddressAttribute()->state ?? null }}" />
                                     <!--end::Input-->
                                 </div>
                                 <!--end::Col-->
@@ -284,7 +198,7 @@
                                     <!--end::Label-->
                                     <!--begin::Input-->
                                     <input class="form-control form-control-solid" placeholder="" name="postcode"
-                                        value="3000" />
+                                        value="{{ $user->getDefaultAddressAttribute()->postcode ?? null }}" />
                                     <!--end::Input-->
                                 </div>
                                 <!--end::Col-->
