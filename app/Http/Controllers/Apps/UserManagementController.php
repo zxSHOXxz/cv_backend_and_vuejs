@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Apps;
 
 use App\DataTables\UsersDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\Address;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserManagementController extends Controller
 {
@@ -46,7 +48,11 @@ class UserManagementController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        if (Auth::id() == $user->id) {
+            return view('pages/apps.user-management.users.edit', compact('user'));
+        } else {
+            return abort('500');
+        }
     }
 
     /**

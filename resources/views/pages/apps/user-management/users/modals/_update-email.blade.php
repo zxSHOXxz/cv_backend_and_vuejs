@@ -1,4 +1,3 @@
-
 <div class="modal fade" id="kt_modal_update_email" tabindex="-1" aria-hidden="true">
     <!--begin::Modal dialog-->
     <div class="modal-dialog modal-dialog-centered mw-650px">
@@ -37,7 +36,8 @@
                         <div class="d-flex flex-stack flex-grow-1">
                             <!--begin::Content-->
                             <div class="fw-semibold">
-                                <div class="fs-6 text-gray-700">Please note that a valid email address is required to complete the email verification.</div>
+                                <div class="fs-6 text-gray-700">Please note that a valid email address is required to
+                                    complete the email verification.</div>
                             </div>
                             <!--end::Content-->
                         </div>
@@ -53,13 +53,15 @@
                         </label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <input class="form-control form-control-solid" placeholder="" name="profile_email" value="smith@kpmg.com" />
+                        <input class="form-control form-control-solid" placeholder="" name="profile_email"
+                            value="smith@kpmg.com" />
                         <!--end::Input-->
                     </div>
                     <!--end::Input group-->
                     <!--begin::Actions-->
                     <div class="text-center pt-15">
-                        <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Discard</button>
+                        <button type="reset" class="btn btn-light me-3"
+                            data-kt-users-modal-action="cancel">Discard</button>
                         <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
                             <span class="indicator-label">Submit</span>
                             <span class="indicator-progress">Please wait...
