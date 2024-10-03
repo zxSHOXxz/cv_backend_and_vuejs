@@ -54,10 +54,7 @@ class FrontApi extends Controller
     }
     public function getProjects()
     {
-        // جلب المشاريع مع الـ tags المرتبطة بها
         $projects = Project::with('tags')->get();
-
-        // إعادة البيانات باستخدام ProjectResource
         return ProjectResource::collection($projects);
     }
 
