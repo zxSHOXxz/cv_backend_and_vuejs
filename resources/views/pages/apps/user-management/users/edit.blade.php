@@ -83,8 +83,8 @@
                             <div class="text-gray-600">
                                 @isset($user->getDefaultAddressAttribute()->address_line_1)
                                     {{ $user->getDefaultAddressAttribute()->address_line_1 }}
-                                    {{ $user->getDefaultAddressAttribute()->address_line_2 ? '<br>' : null }}
-                                    {{ $user->getDefaultAddressAttribute()->address_line_2 }}
+                                    <br>
+                                    {{ $user->getDefaultAddressAttribute()->address_line_2 ?? null }}
                                     <br>
                                     {{ $user->getDefaultAddressAttribute()->city }}
                                     <br>
@@ -528,7 +528,8 @@
     <!--end::Layout-->
     <!--begin::Modals-->
     <!--begin::Modal - Update user details-->
-    @include('pages/apps/user-management/users/modals/_update-details')
+    {{-- @include('pages/apps/user-management/users/modals/_update-details') --}}
+    <livewire:user.edit-user-modal></livewire:user.edit-user-modal>
     <!--end::Modal - Update user details-->
     <!--begin::Modal - Add schedule-->
     {{-- @include('pages/apps/user-management/users/modals/_add-schedule') --}}
@@ -541,7 +542,9 @@
     <livewire:user.edit-user-email-modal></livewire:user.edit-user-email-modal>
     <!--end::Modal - Update email-->
     <!--begin::Modal - Update password-->
-    @include('pages/apps/user-management/users/modals/_update-password')
+    {{-- @include('pages/apps/user-management/users/modals/_update-password') --}}
+    <livewire:user.edit-user-password-modal></livewire:user.edit-user-password-modal>
+
     <!--end::Modal - Update password-->
     <!--begin::Modal - Update role-->
     {{-- @include('pages/apps/user-management/users/modals/_update-role') --}}

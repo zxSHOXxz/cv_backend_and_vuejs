@@ -41,8 +41,8 @@
         <!--begin::Menu wrapper-->
         <div class="cursor-pointer symbol symbol-35px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
             data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-            @if (Auth::user()->avatar)
-                <img src="{{ asset('storage/' . Auth::user()->avatar) }}" class="rounded-3" alt="user" />
+            @if (Auth::user()->profile_photo_url)
+                <img src="{{ Auth::user()->profile_photo_url }}" class="rounded-3" alt="user" />
             @else
                 <div
                     class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-? text-?', Auth::user()->name) }}">

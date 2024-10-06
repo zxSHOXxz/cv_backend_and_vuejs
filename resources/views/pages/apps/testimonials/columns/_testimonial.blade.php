@@ -3,7 +3,7 @@
         <a href="{{ route('testimonials.show', $testimonial) }}">
             @if ($testimonial->image)
                 <div class="symbol-label">
-                    <img src="{{ asset('storage/' . $testimonial->image) }}" class="w-100" />
+                    <img src="{{ $testimonial->getConvertedImage() }}" class="w-100" />
                 </div>
             @else
                 <div

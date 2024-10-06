@@ -9,11 +9,16 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements MustVerifyEmail
+use Spatie\Image\Enums\Fit;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\HasMedia;
+
+class User extends Authenticatable implements MustVerifyEmail, HasMedia
 {
     use HasApiTokens, HasFactory, Notifiable;
     use HasRoles;
-
+    use InteractsWithMedia;
     /**
      * The attributes that are mass assignable.
      *
@@ -63,8 +68,26 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Address::class);
     }
 
+
     public function getDefaultAddressAttribute()
     {
         return $this->addresses?->first();
+    }
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('webp')
+            ->format('webp')
+            ->quality(65)
+            ->nonQueued();
+    }
+    public function getConvertedImage($conversionName = 'webp')
+    {
+        $media = $this->getFirstMedia('avatar');
+
+        if ($media) {
+            return $media->getUrl($conversionName);
+        }
+
+        return null;
     }
 }

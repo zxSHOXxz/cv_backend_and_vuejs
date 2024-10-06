@@ -122,13 +122,13 @@
             <div class="carousel-inner pt-8">
                 @foreach (json_decode($home_page->images) as $image)
                     <div class="carousel-item {{ $loop->first == true ? 'active' : '' }} ">
-                        <img src="{{ asset('storage/' . $image) }}" alt="">
+                        <img src="{{ $image }}" alt="">
                         <div class="overlay"></div>
                     </div>
                 @endforeach
             </div>
             <div class="main-image img-container">
-                <img src="{{ asset('storage/' . $home_page->main_image) }}" alt="">
+                <img src="{{ $home_page->main_image }}" alt="">
             </div>
             <div class="show-name">
                 {{ $home_page->name }}

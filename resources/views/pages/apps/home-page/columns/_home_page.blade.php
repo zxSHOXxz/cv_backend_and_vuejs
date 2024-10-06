@@ -3,7 +3,7 @@
         <a href="{{ route('home-page.show', $home_page) }}">
             @if ($home_page->main_image)
                 <div class="symbol-label">
-                    <img src="{{ asset('storage/' . $home_page->main_image) }}" class="w-100" />
+                    <img src="{{ $home_page->getConvertedImage() }}" class="w-100" />
                 </div>
             @else
                 <div

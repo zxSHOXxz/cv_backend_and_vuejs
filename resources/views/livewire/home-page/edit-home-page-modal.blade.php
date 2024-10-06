@@ -48,7 +48,7 @@
                         @if ($uploadedImages && $editedImages == null)
                             <div class="mt-2">
                                 @foreach (json_decode($uploadedImages) as $image)
-                                    <img src="{{ asset('storage/' . $image) }}" alt="Preview" class="img-thumbnail"
+                                    <img src="{{ $image }}" alt="Preview" class="img-thumbnail"
                                         width="100" />
                                 @endforeach
                             </div>
@@ -128,7 +128,7 @@
 
                         @if ($main_image && $editedMainImage == null)
                             <div class="mt-2">
-                                <img src="{{ asset('storage/' . $main_image) }}" alt="Preview" class="img-thumbnail"
+                                <img src="{{ $home_page->getConvertedImage() }}" alt="Preview" class="img-thumbnail"
                                     width="200" />
                             </div>
                         @endif
@@ -165,7 +165,6 @@
             var initialTags = @json($home_page->tags);
             var tagsArr = JSON.parse(initialTags);
 
-            console.log(tagsArr);
 
             // تهيئة Tagify بالوسوم الابتدائية
             var tagify = new Tagify(input);
@@ -177,9 +176,7 @@
             tagify.on('change', function() {
                 var tags = tagify.value.map(tag => tag.value); // استخراج القيم من Tagify
                 var tagify_edited = document.getElementById('tagify_edited');
-                console.log(tagify_edited);
                 tagify_edited.value = tags;
-                console.log(tagify_edited.value);
 
                 @this.set('tagify_edited', tags);
 

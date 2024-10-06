@@ -50,20 +50,42 @@ class AddHomePageModal extends Component
     {
         $this->validate();
 
-        $mainImagePath = $this->main_image->store('main_images', 'public');
 
-        $imagePaths = [];
-        foreach ($this->uploadedImages as $image) {
-            $imagePaths[] = $image->store('gallery_images', 'public');
-        }
-
-        HomePage::create([
+        $homePage = HomePage::create([
             'name' => $this->name,
             'tags' => json_encode($this->tags), // تخزين tags كـ JSON
-            'images' => json_encode($imagePaths), // تخزين مسارات الصور كـ JSON
+            'images' => json_encode(['sdsd', 'sdsd']), // تخزين مسارات الصور كـ JSON
             'socials' => json_encode($this->socials), // تخزين روابط السوشيال كـ JSON
-            'main_image' => $mainImagePath,
+            'main_image' => json_encode(['sdsd', 'sdsd']),
         ]);
+
+        // $mainImagePath = $this->main_image->store('main_images', 'public');
+
+        $main_imagePath = $homePage->addMedia($this->main_image)
+            ->toMediaCollection('main_image');
+
+
+        // $imagePaths = [];
+        // foreach ($this->uploadedImages as $image) {
+        //     $imagePaths[] = $image->store('gallery_images', 'public');
+        // }
+
+        // مصفوفة لتخزين مسارات الصور
+        $imagePaths = [];
+
+        // رفع الصور الأخرى وتخزين مساراتها
+        foreach ($this->uploadedImages as $image) {
+            $media = $homePage->addMedia($image)
+                ->toMediaCollection('gallery_images');
+            $imagePaths[] = $media->getUrl(); // جلب مسار الصورة بعد رفعها
+        }
+
+        // تحديث السجل لتخزين مسارات الصور كـ JSON
+        $homePage->update([
+            'images' => json_encode($imagePaths), // تخزين مسارات الصور كـ JSON
+            'main_image' => $main_imagePath->getUrl(), // تخزين مسارات الصور كـ JSON
+        ]);
+
 
         $this->reset(['name', 'tags', 'uploadedImages', 'socials', 'main_image']);
 

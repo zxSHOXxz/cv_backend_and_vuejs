@@ -69,9 +69,12 @@ class EditHomePageModal extends Component
         // الآن تحقق من البيانات بعد استبدال الصور بالقيم الجديدة إن وجدت
         $this->validate();
 
+        $home_page = HomePage::findOrFail($this->home_page_id);
+
         // إذا كانت هناك صورة رئيسية جديدة تم تعديلها بعد التحقق، قم بتخزينها
         if ($this->editedMainImage != null) {
-            $mainImagePath = $this->editedMainImage->store('main_images', 'public');
+            $mainImagePath = $home_page->addMedia($this->editedMainImage)
+                ->toMediaCollection('main_image');
         } else {
             // إذا لم يتم تعديل الصورة الرئيسية، احتفظ بالمسار القديم
             $mainImagePath = $this->main_image;
@@ -81,7 +84,11 @@ class EditHomePageModal extends Component
         if ($this->editedImages != null) {
             $imagePaths = [];
             foreach ($this->editedImages as $image) {
-                $imagePaths[] = $image->store('gallery_images', 'public');
+
+                $media = $home_page->addMedia($image)
+                    ->toMediaCollection('gallery_images');
+
+                $imagePaths[] = $media->getUrl();
             }
 
             $encoded_images = json_encode($imagePaths);
@@ -90,13 +97,13 @@ class EditHomePageModal extends Component
             $encoded_images = $imagePaths;
         }
 
-        $home_page = HomePage::all()->first();
+
         $home_page->update([
             'name' => $this->name,
             'tags' => json_encode($this->tagify_edited),
             'images' => $encoded_images,
             'socials' => json_encode($this->socials),
-            'main_image' => $mainImagePath,
+            'main_image' => $mainImagePath->getUrl(),
         ]);
 
         // إعادة تعيين القيم بعد الحفظ

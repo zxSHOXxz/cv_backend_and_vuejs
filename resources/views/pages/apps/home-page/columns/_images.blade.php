@@ -4,7 +4,7 @@
     @endphp
     @foreach ($php as $image)
         <div style="width: 120px;" class="mx-2">
-            <img src="{{ asset('storage/' . $image) }}" class="w-100" />
+            <img src="{{ $image }}" class="w-100" />
         </div>
     @endforeach
 </div>

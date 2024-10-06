@@ -16,6 +16,7 @@ class AddTestimonialModal extends Component
     public $title;
     public $text;
     public $photo;
+    public $saved_photo;
 
     public $edit_mode;
 
@@ -23,7 +24,7 @@ class AddTestimonialModal extends Component
         'name' => 'required|string',
         'title' => 'required|string',
         'text' => 'required|string',
-        'photo' => 'required|image',
+        'photo' => 'nullable|sometimes|image|max:1024',
     ];
 
     protected $listeners = [
@@ -38,21 +39,25 @@ class AddTestimonialModal extends Component
 
     public function submit()
     {
+
         $this->validate();
         DB::transaction(function () {
             $data = [
                 'name' => $this->name,
                 'title' => $this->title,
                 'text' => $this->text,
+                'image' => 'nulllllll',
             ];
 
+            $testimonial = Testimonial::find($this->testimonial_id) ?? Testimonial::create($data);
+
             if ($this->photo) {
-                $data['image'] = $this->photo->store('testimonials', 'public');
+                $imaage = $testimonial->addMedia($this->photo)->toMediaCollection('image');
+                $testimonial->update(['image' => $imaage->id . '/' . $imaage->file_name]);
             } else {
                 $data['image'] = $this->saved_photo;
             }
 
-            $testimonial = Testimonial::find($this->testimonial_id) ?? Testimonial::create($data);
 
             if ($this->edit_mode) {
                 foreach ($data as $k => $v) {
@@ -77,7 +82,7 @@ class AddTestimonialModal extends Component
 
         $testimonial = Testimonial::find($id);
         $this->testimonial_id = $testimonial->id;
-        $this->photo = $testimonial->photo;
+        $this->saved_photo = $testimonial->image;
         $this->name = $testimonial->name;
         $this->title = $testimonial->title;
         $this->text = $testimonial->text;

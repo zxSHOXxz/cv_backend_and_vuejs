@@ -141,5 +141,16 @@
 </div>
 
 @push('scripts')
-    <script></script>
+    <script>
+        document.addEventListener('livewire:init', function() {
+            var input = document.getElementById('tagify');
+            var tagify = new Tagify(input);
+
+            tagify.on('change', function() {
+                var tags = tagify.value.map(tag => tag.value);
+                @this.set('tags', tags);
+
+            });
+        });
+    </script>
 @endpush
