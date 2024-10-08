@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProjectResource;
+use App\Http\Resources\TestimonialResource;
 use App\Models\Eductaion;
 use App\Models\Experience;
 use App\Models\HomePage;
@@ -14,6 +15,7 @@ use App\Models\Skill;
 use App\Models\Tag;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
+use PHPUnit\Event\Code\Test;
 
 class FrontApi extends Controller
 {
@@ -50,7 +52,7 @@ class FrontApi extends Controller
     public function getTestimonials()
     {
         $testimonials = Testimonial::all();
-        return response()->json($testimonials);
+        return TestimonialResource::collection($testimonials);
     }
     public function getProjects()
     {
