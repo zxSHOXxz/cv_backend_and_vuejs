@@ -21,7 +21,7 @@ class ProjectResource extends JsonResource
             'status' => $this->status,
             'completion_date' => $this->completion_date,
             'description' => $this->description,
-            'image' => 'https://dashboard.amralkhozondar.com/storage/' . $this->image,
+            'image' => $this->getConvertedImage(),
             'tags' => $this->tags->map(function ($tag) {
                 return [
                     'id' => $tag->id,

@@ -60,13 +60,22 @@ class AddProjectModal extends Component
                 'completion_date' => $this->completion_date,
             ];
 
+            // if ($this->photo) {
+            //     $data['image'] = $this->photo->store('projects', 'public');
+            // } else {
+            //     $data['image'] = $this->saved_photo;
+            // }
+
+            $project = Project::find($this->project_id) ?? Project::create($data);
+
+
             if ($this->photo) {
-                $data['image'] = $this->photo->store('projects', 'public');
+                $imaage = $project->addMedia($this->photo)->toMediaCollection('image');
+                $project->update(['image' => $imaage->id . '/' . $imaage->file_name]);
             } else {
                 $data['image'] = $this->saved_photo;
             }
 
-            $project = Project::find($this->project_id) ?? Project::create($data);
 
             if ($this->edit_mode) {
                 foreach ($data as $k => $v) {
