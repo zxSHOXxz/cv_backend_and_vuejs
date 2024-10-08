@@ -30,9 +30,10 @@ class Project extends Model implements HasMedia
     }
 
 
+
     public function getConvertedImage($conversionName = 'webp')
     {
-        $media = $this->getFirstMedia('image');
+        $media = $this->getMedia('image')->last(); // Use last() to get the latest added image
 
         if ($media) {
             return $media->getUrl($conversionName);

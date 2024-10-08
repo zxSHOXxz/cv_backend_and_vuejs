@@ -55,32 +55,25 @@ class EditHomePageModal extends Component
 
     public function submit()
     {
-        // التحقق إذا تم تعديل الصورة الرئيسية أو الصور الأخرى قبل الـ validate
         if ($this->editedMainImage != null) {
-            // إذا تم تعديل الصورة الرئيسية، استبدلها بالقيمة الجديدة لكي تتحقق الـ validate منها
             $this->main_image = $this->editedMainImage;
         }
 
         if ($this->editedImages != null) {
-            // إذا تم تعديل الصور الأخرى، استبدلها بالقيمة الجديدة لكي تتحقق الـ validate منها
             $this->uploadedImages = $this->editedImages;
         }
 
-        // الآن تحقق من البيانات بعد استبدال الصور بالقيم الجديدة إن وجدت
         $this->validate();
 
         $home_page = HomePage::findOrFail($this->home_page_id);
 
-        // إذا كانت هناك صورة رئيسية جديدة تم تعديلها بعد التحقق، قم بتخزينها
         if ($this->editedMainImage != null) {
             $mainImagePath = $home_page->addMedia($this->editedMainImage)
                 ->toMediaCollection('main_image');
         } else {
-            // إذا لم يتم تعديل الصورة الرئيسية، احتفظ بالمسار القديم
             $mainImagePath = $this->main_image;
         }
 
-        // إذا تم تعديل الصور الأخرى بعد التحقق، قم بتخزينها
         if ($this->editedImages != null) {
             $imagePaths = [];
             foreach ($this->editedImages as $image) {
@@ -106,10 +99,8 @@ class EditHomePageModal extends Component
             'main_image' => $mainImagePath->getUrl(),
         ]);
 
-        // إعادة تعيين القيم بعد الحفظ
         $this->reset(['name', 'tags', 'uploadedImages', 'socials', 'main_image', 'editedMainImage', 'editedImages']);
 
-        // إرسال رسالة نجاح
         $this->dispatch('success', __('HomePage updated'));
     }
 

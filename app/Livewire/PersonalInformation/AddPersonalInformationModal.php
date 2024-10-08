@@ -57,7 +57,6 @@ class AddPersonalInformationModal extends Component
         // $this->validate();
 
         DB::transaction(function () {
-            // Prepare data for saving
             $data = [
                 'name' => $this->name,
                 'age' => $this->age,
@@ -71,15 +70,12 @@ class AddPersonalInformationModal extends Component
                 'freelance' => $this->freelance,
             ];
 
-            // Handle resume file upload
             if ($this->resume) {
-                // Store the uploaded file and get the file path
                 $resumePath = $this->resume->store('resumes', 'public');
                 $data['resume'] = $resumePath;
             }
 
             $personal_information = PersonalInformation::find($this->personal_information_id) ?? PersonalInformation::create($data);
-            // dd($this->resume);
 
             if ($this->edit_mode) {
                 foreach ($data as $k => $v) {

@@ -82,7 +82,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     }
     public function getConvertedImage($conversionName = 'webp')
     {
-        $media = $this->getFirstMedia('avatar');
+        $media = $this->getMedia('avatar')->last(); // Use last() to get the latest added image
 
         if ($media) {
             return $media->getUrl($conversionName);

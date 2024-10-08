@@ -28,7 +28,7 @@ class HomePage extends Model  implements HasMedia
 
     public function getConvertedImage($conversionName = 'webp')
     {
-        $media = $this->getFirstMedia('main_image');
+        $media = $this->getMedia('main_image')->last(); // Use last() to get the latest added image
 
         if ($media) {
             return $media->getUrl($conversionName);

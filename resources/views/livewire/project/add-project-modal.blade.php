@@ -14,8 +14,11 @@
                         data-kt-scroll-dependencies="#kt_modal_add_project_header"
                         data-kt-scroll-wrappers="#kt_modal_add_project_scroll" data-kt-scroll-offset="300px">
                         <div class="fv-row mb-7">
-                            @if ($photo)
-                                <img src="{{ $photo->temporaryUrl() }}">
+                            @if ($photo && $edit_mode == false)
+                                <div class="mt-2">
+                                    <img src="{{ $photo->temporaryUrl() }}" alt="Main Image Preview"
+                                        class="img-thumbnail" width="200" />
+                                </div>
                             @endif
 
                             <label class="required fw-semibold fs-6 mb-2">photo</label>

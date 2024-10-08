@@ -54,6 +54,7 @@ class AddTestimonialModal extends Component
             if ($this->photo) {
                 $imaage = $testimonial->addMedia($this->photo)->toMediaCollection('image');
                 $testimonial->update(['image' => $imaage->id . '/' . $imaage->file_name]);
+                $data['image'] = ($imaage->id . '/' . $imaage->file_name);
             } else {
                 $data['image'] = $this->saved_photo;
             }
@@ -66,7 +67,6 @@ class AddTestimonialModal extends Component
                 $testimonial->save();
             }
             if ($this->edit_mode) {
-                // Emit a success event with a message
                 $this->dispatch('success', __('Testimonials updated'));
             } else {
                 $this->dispatch('success', __('New Testimonials created'));

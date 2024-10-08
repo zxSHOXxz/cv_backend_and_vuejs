@@ -15,13 +15,18 @@
                         data-kt-scroll-dependencies="#kt_modal_add_testimonial_header"
                         data-kt-scroll-wrappers="#kt_modal_add_testimonial_scroll" data-kt-scroll-offset="300px">
                         <div class="fv-row mb-7">
-                            @if ($photo)
-                                <img src="{{ $photo->temporaryUrl() }}">
-                            @endif
-
                             <label class="required fw-semibold fs-6 mb-2">photo</label>
                             <input type="file" wire:model="photo" name="photo"
                                 class="form-control form-control-solid mb-3 mb-lg-0" />
+
+
+                            @if ($photo && $edit_mode == false)
+                                <div class="mt-2">
+                                    <img src="{{ $photo->temporaryUrl() }}" alt="Main Image Preview"
+                                        class="img-thumbnail" width="200" />
+                                </div>
+                            @endif
+
                             @error('photo')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror

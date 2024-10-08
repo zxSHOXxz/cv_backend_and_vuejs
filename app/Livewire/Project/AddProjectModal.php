@@ -72,6 +72,7 @@ class AddProjectModal extends Component
             if ($this->photo) {
                 $imaage = $project->addMedia($this->photo)->toMediaCollection('image');
                 $project->update(['image' => $imaage->id . '/' . $imaage->file_name]);
+                $data['image'] = ($imaage->id . '/' . $imaage->file_name);
             } else {
                 $data['image'] = $this->saved_photo;
             }
