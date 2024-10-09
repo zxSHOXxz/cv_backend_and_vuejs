@@ -25,7 +25,7 @@ class Project extends Model implements HasMedia
     {
         $this->addMediaConversion('webp')
             ->format('webp')
-            ->quality(65)
+            ->quality(35)
             ->nonQueued();
     }
 
@@ -33,7 +33,7 @@ class Project extends Model implements HasMedia
 
     public function getConvertedImage($conversionName = 'webp')
     {
-        $media = $this->getMedia('image')->last(); // Use last() to get the latest added image
+        $media = $this->getMedia('image')->last();
 
         if ($media) {
             return $media->getUrl($conversionName);
