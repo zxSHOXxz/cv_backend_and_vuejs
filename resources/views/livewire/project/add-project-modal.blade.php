@@ -24,11 +24,6 @@
                                     <img src="{{ $image->temporaryUrl() }}" alt="Image Preview" class="img-thumbnail"
                                         width="200" />
                                 </div>
-
-                                <div class="mt-2">
-                                    <progress max="100" value="{{ $progress }}">
-                                        {{ $image->temporaryUrl() }}</progress>
-                                </div>
                             @endif
 
                             <div class="uploading" wire:loading wire:target="image">
