@@ -6,8 +6,8 @@
         <div class="menu-content d-flex align-items-center px-3">
             <!--begin::Avatar-->
             <div class="symbol symbol-50px me-5">
-                @if (Auth::user()->profile_photo_url)
-                    <img alt="Logo" src="{{ Auth::user()->profile_photo_url }}" />
+                @if (Auth::user()->getConvertedImage())
+                    <img alt="Logo" src="{{ Auth::user()->getConvertedImage() }}" />
                 @else
                     <div
                         class="symbol-label fs-3 {{ app(\App\Actions\GetThemeType::class)->handle('bg-light-? text-?', Auth::user()->name) }}">
