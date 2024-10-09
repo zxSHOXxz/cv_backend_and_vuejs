@@ -13,18 +13,29 @@
                         data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-max-height="auto"
                         data-kt-scroll-dependencies="#kt_modal_add_project_header"
                         data-kt-scroll-wrappers="#kt_modal_add_project_scroll" data-kt-scroll-offset="300px">
+
                         <div class="fv-row mb-7">
-                            @if ($photo && $edit_mode == false)
+                            <label class="required fw-semibold fs-6 mb-2">image</label>
+                            <input type="file" wire:model="image" name="image"
+                                class="form-control form-control-solid mb-3 mb-lg-0" />
+
+                            @if ($image && $edit_mode == false)
                                 <div class="mt-2">
-                                    <img src="{{ $photo->temporaryUrl() }}" alt="Main Image Preview"
-                                        class="img-thumbnail" width="200" />
+                                    <img src="{{ $image->temporaryUrl() }}" alt="Image Preview" class="img-thumbnail"
+                                        width="200" />
+                                </div>
+
+                                <div class="mt-2">
+                                    <progress max="100" value="{{ $progress }}">
+                                        {{ $image->temporaryUrl() }}</progress>
                                 </div>
                             @endif
 
-                            <label class="required fw-semibold fs-6 mb-2">photo</label>
-                            <input type="file" wire:model="photo" name="photo"
-                                class="form-control form-control-solid mb-3 mb-lg-0" />
-                            @error('photo')
+                            <div class="uploading" wire:loading wire:target="image">
+                                <span class="text-muted"> Uploading...
+                                </span>
+                            </div>
+                            @error('image')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -117,6 +128,7 @@
                         </div>
 
                         <!--end::Scroll-->
+
 
                         <!--begin::Actions-->
                         <div class="text-center pt-15">

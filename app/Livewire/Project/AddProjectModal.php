@@ -16,10 +16,11 @@ class AddProjectModal extends Component
     public $name;
     public $description;
     public $status;
-    public $photo;
-    public $saved_photo;
+    public $image;
+    public $saved_image;
     public $completion_date;
     public $tag_ids;
+
 
     public $edit_mode;
 
@@ -29,7 +30,7 @@ class AddProjectModal extends Component
             'name' => 'required|string',
             'description' => 'required|string',
             'status' => 'required|boolean',
-            'photo' => $this->edit_mode ? 'nullable' : 'required', // الصورة غير مطلوبة في وضع التعديل
+            'image' => $this->edit_mode ? 'nullable' : 'required', // الصورة غير مطلوبة في وضع التعديل
             'completion_date' => 'required|date',
             'tag_ids' => 'required|array',
         ];
@@ -58,23 +59,18 @@ class AddProjectModal extends Component
                 'description' => $this->description,
                 'status' => $this->status,
                 'completion_date' => $this->completion_date,
+                'image' => 'nulllllll',
             ];
-
-            // if ($this->photo) {
-            //     $data['image'] = $this->photo->store('projects', 'public');
-            // } else {
-            //     $data['image'] = $this->saved_photo;
-            // }
 
             $project = Project::find($this->project_id) ?? Project::create($data);
 
 
-            if ($this->photo) {
-                $imaage = $project->addMedia($this->photo)->toMediaCollection('image');
+            if ($this->image) {
+                $imaage = $project->addMedia($this->image)->toMediaCollection('image');
                 $project->update(['image' => $imaage->id . '/' . $imaage->file_name]);
                 $data['image'] = ($imaage->id . '/' . $imaage->file_name);
             } else {
-                $data['image'] = $this->saved_photo;
+                $data['image'] = $this->saved_image;
             }
 
 
@@ -105,8 +101,8 @@ class AddProjectModal extends Component
 
         $project = Project::find($id);
         $this->project_id = $project->id;
-        $this->photo = $project->image;
-        $this->saved_photo = $project->image;
+        $this->image = $project->image;
+        $this->saved_image = $project->image;
         $this->name = $project->name;
         $this->description = $project->description;
         $this->status = (bool) $project->status;

@@ -27,6 +27,11 @@
                                 </div>
                             @endif
 
+                            <div class="uploading" wire:loading wire:target="image">
+                                <span class="text-muted"> Uploading...
+                                </span>
+                            </div>
+                            
                             @error('photo')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
