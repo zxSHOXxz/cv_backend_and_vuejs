@@ -3,7 +3,7 @@
     <a href="{{ route('user-management.users.show', $user) }}">
         @if ($user->avatar)
             <div class="symbol-label">
-                <img src="{{ asset('storage/' . $user->avatar) }}" class="w-100" />
+                <img src="{{ $user->getConvertedImage() }}" class="w-100" />
             </div>
         @else
             <div
