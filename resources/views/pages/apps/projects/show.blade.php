@@ -41,13 +41,14 @@
                 color: #fff !important;
                 transform: translateX(-50%);
             }
+
             .text {
                 display: flex;
                 flex-direction: column;
             }
         </style>
         <div class="project-image col-10">
-            <img src="{{ asset('storage/' . $project->image) }}" alt="">
+            <img src="{{ $project->getConvertedImage() }}" alt="">
         </div>
         <div class="text col-2 pt-5 mt-4">
             <div class="treeview description me-4 bg-info bg-opacity-75">

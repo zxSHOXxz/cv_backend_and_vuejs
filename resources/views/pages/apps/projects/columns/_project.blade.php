@@ -3,7 +3,7 @@
         <a href="{{ route('projects.show', $project) }}">
             @if ($project->image)
                 <div class="symbol-label">
-                    <img src="{{ asset('storage/' . $project->image) }}" class="w-100" />
+                    <img src="{{ $project->getConvertedImage() }}" class="w-100" />
                 </div>
             @else
                 <div

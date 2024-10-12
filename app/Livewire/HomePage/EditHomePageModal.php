@@ -70,7 +70,7 @@ class EditHomePageModal extends Component
         if ($this->editedMainImage != null) {
             $main_imagee =  $home_page->addMedia($this->editedMainImage)
                 ->toMediaCollection('main_image');
-            $mainImagePath = $main_imagee->getUrl();
+            $mainImagePath = $main_imagee->getUrl('webp');
         } else {
             $mainImagePath = $this->main_image;
         }
@@ -82,7 +82,7 @@ class EditHomePageModal extends Component
                 $media = $home_page->addMedia($image)
                     ->toMediaCollection('gallery_images');
 
-                $imagePaths[] = $media->getUrl();
+                $imagePaths[] = $media->getUrl('webp');
             }
 
             $encoded_images = json_encode($imagePaths);
