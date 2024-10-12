@@ -56,8 +56,8 @@
                             </span>
                         </div>
                         <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Edit User details">
-                            <a href="#" class="btn btn-sm btn-light-primary btn-disabled" data-bs-toggle="modal"
-                                data-bs-target="#kt_modal_update_details">Edit</a>
+                            <button href="#" class="btn btn-sm btn-light-primary" data-bs-toggle="modal"
+                                data-bs-target="#kt_modal_update_details" disabled>Edit</button>
                         </span>
                     </div>
                     <!--end::Details toggle-->
