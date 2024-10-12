@@ -83,24 +83,6 @@
                         </div>
                         <!--end::Input group-->
 
-                        <!--begin::Input group: Resume (File Upload) -->
-                        <div class="fv-row mb-7">
-                            <label class="required fw-semibold fs-6 mb-2">Resume</label>
-                            <input type="file" wire:model="resume" name="resume"
-                                class="form-control form-control-solid mb-3 mb-lg-0" />
-                            @error('resume')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-
-                            @if ($resume)
-                                <!-- Show uploaded file preview if exists -->
-                                <div class="mt-2">
-                                    <span>Uploaded File: {{ $resume }}</span>
-                                </div>
-                            @endif
-                        </div>
-                        <!--end::Input group-->
-
                         <!--begin::Input group: Job Title -->
                         <div class="fv-row mb-7">
                             <label class="required fw-semibold fs-6 mb-2">Job Title</label>
@@ -149,6 +131,24 @@
                             @error('freelance')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
+                        </div>
+                        <!--end::Input group-->
+
+                        <!--begin::Input group: Resume (File Upload) -->
+                        <div class="fv-row mb-7">
+                            <label class="required fw-semibold fs-6 mb-2">Resume</label>
+                            <input type="file" wire:model="resume" name="resume"
+                                class="form-control form-control-solid mb-3 mb-lg-0" />
+                            @error('resume')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+
+                            @if ($resume)
+                                <!-- Show uploaded file preview if exists -->
+                                <div class="mt-2">
+                                    <span>Uploaded File: {{ $resume }}</span>
+                                </div>
+                            @endif
                         </div>
                         <!--end::Input group-->
 

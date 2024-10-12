@@ -106,7 +106,7 @@ class AddPersonalInformationModal extends Component
         $this->job_title = $personal_information->job_title;
         $this->about_me = $personal_information->about_me;
         $this->signture = $personal_information->signture;
-        $this->freelance = $personal_information->freelance;
+        $this->freelance = (bool) $personal_information->freelance;
         $this->resume = $personal_information->resume; // Resume path if it's already uploaded
     }
 

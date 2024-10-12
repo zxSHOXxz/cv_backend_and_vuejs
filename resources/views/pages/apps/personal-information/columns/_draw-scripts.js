@@ -44,3 +44,10 @@ Livewire.on("success", (message) => {
     // Reload the personal-informations-table datatable
     LaravelDataTables["personal-informations-table"].ajax.reload();
 });
+
+$('table td').css({
+    'white-space': 'nowrap',
+    'text-overflow': 'ellipsis',
+    'overflow': 'hidden',
+    'max-width': '300px'
+});

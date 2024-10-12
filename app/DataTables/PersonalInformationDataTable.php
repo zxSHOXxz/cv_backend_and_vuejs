@@ -25,7 +25,20 @@ class PersonalInformationDataTable extends DataTable
             ->addColumn('action', function (PersonalInformation $personal_information) {
                 return view('pages/apps.personal-information.columns._actions', compact('personal_information'));
             })
-            ->rawColumns(['action']) // تأكد من تضمين الحقول التي تحتوي على HTML هنا
+            ->editColumn('freelance', function (PersonalInformation $personal_information) {
+                $status = $personal_information->freelance ? 'Available' : 'Not Available';
+                $badgeClass = $personal_information->freelance ? 'badge-success' : 'badge-danger';
+                return sprintf('<span class="badge %s">%s</span>', $badgeClass, $status);
+            })
+            ->editColumn('resume', function (PersonalInformation $personal_information) {
+                if ($personal_information->resume) {
+                    return '<a href="' . asset('storage/' . $personal_information->resume) . '" target="_blank" class="btn btn-icon btn-sm btn-light-primary">' .
+                        '<i class="fas fa-download"></i>' .
+                        '</a>';
+                }
+                return 'No resume';
+            })
+            ->rawColumns(['action', 'freelance', 'resume'])
             ->setRowId('id');
     }
 
