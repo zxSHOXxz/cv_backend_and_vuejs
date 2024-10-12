@@ -28,8 +28,6 @@ class AddHomePageModal extends Component
 
     public $edit_mode;
 
-
-
     protected $rules = [
         'name' => 'required|string|max:255',
         'tags' => 'required',
@@ -59,16 +57,10 @@ class AddHomePageModal extends Component
             'main_image' => json_encode(['sdsd', 'sdsd']),
         ]);
 
-        // $mainImagePath = $this->main_image->store('main_images', 'public');
 
         $main_imagePath = $homePage->addMedia($this->main_image)
             ->toMediaCollection('main_image');
 
-
-        // $imagePaths = [];
-        // foreach ($this->uploadedImages as $image) {
-        //     $imagePaths[] = $image->store('gallery_images', 'public');
-        // }
 
         // مصفوفة لتخزين مسارات الصور
         $imagePaths = [];

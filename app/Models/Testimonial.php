@@ -22,7 +22,7 @@ class Testimonial extends Model implements HasMedia
     {
         $this->addMediaConversion('webp')
             ->format('webp')
-            ->quality(50)
+            ->quality(45)
             ->nonQueued();
     }
 

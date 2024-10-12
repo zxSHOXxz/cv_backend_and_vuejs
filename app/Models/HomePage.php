@@ -21,7 +21,7 @@ class HomePage extends Model  implements HasMedia
     {
         $this->addMediaConversion('webp')
             ->format('webp')
-            ->quality(65)
+            ->quality(45)
             ->nonQueued();
     }
 

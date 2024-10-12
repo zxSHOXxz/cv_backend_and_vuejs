@@ -68,8 +68,9 @@ class EditHomePageModal extends Component
         $home_page = HomePage::findOrFail($this->home_page_id);
 
         if ($this->editedMainImage != null) {
-            $mainImagePath = $home_page->addMedia($this->editedMainImage)
+            $main_imagee =  $home_page->addMedia($this->editedMainImage)
                 ->toMediaCollection('main_image');
+            $mainImagePath = $main_imagee->getUrl();
         } else {
             $mainImagePath = $this->main_image;
         }
@@ -96,7 +97,7 @@ class EditHomePageModal extends Component
             'tags' => json_encode($this->tagify_edited),
             'images' => $encoded_images,
             'socials' => json_encode($this->socials),
-            'main_image' => $mainImagePath->getUrl(),
+            'main_image' => $mainImagePath,
         ]);
 
         $this->reset(['name', 'tags', 'uploadedImages', 'socials', 'main_image', 'editedMainImage', 'editedImages']);
